@@ -11,12 +11,17 @@ public abstract class MovementBehaviour : MonoBehaviour {
 
     public bool disabled;
     public float maxspeed = 5;
-    public float speed = 20;
+    public float speed = 5;
 
     void Start() {
         controller = GetComponent<CharController>();
         body = GetComponent<Rigidbody2D>();
         disabled = false;
+        init();
+    }
+
+    virtual protected void init() {
+
     }
 
     // Update is called once per frame
@@ -26,7 +31,7 @@ public abstract class MovementBehaviour : MonoBehaviour {
             if (controller.isMoveInput()) {
                  input = UpdateMovementInput();
             }
-            body.velocity += direction * speed * Time.deltaTime;
+            body.velocity = direction * speed;
 
 
             if (!input) {

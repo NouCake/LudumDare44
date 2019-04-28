@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DialogHitbox
+  - damageable
   layers:
   - Default
   - TransparentFX
@@ -41,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Healthbar
+    uniqueID: 3245698965
     locked: 0

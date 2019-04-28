@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerDialogBehaviour : MonoBehaviour {
 
-    private BoxCollider2D collider;
+    private BoxCollider2D hitbox;
 
     void Start() {
-        collider = transform.Find("hb_dialog").GetComponent<BoxCollider2D>();
+        hitbox = transform.Find("hb_dialog").GetComponent<BoxCollider2D>();
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         
@@ -18,10 +17,17 @@ public class PlayerDialogBehaviour : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
 
-        if (collider.IsTouching(collision)) {
+        if (hitbox.IsTouching(collision)) {
             UIController.get().setDialogCaption(collision.name);
             Debug.Log(collision.transform.name);
         }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        UIController.get().setDialogCaption("None");
+
     }
 
 }
