@@ -16,8 +16,8 @@ public class EnemyMovementBehaviour : MovementBehaviour {
 
         float distance = Vector3.Distance(transform.position, player.transform.position);
         if (distance < MaxPlayerDistance && distance > MinPlayerDistance) {
-
-            direction = player.transform.position - transform.position;
+            
+            direction += (Vector2)(player.transform.position - transform.position);
             direction.Normalize();
 
             return true;
@@ -25,4 +25,16 @@ public class EnemyMovementBehaviour : MovementBehaviour {
 
         return false;
     }
+
+    private void OnTriggerStay2D(Collider2D collision) {
+        if (collision.tag == "damageable") {
+            CharController cha = collision.GetComponentInParent<CharController>();
+            if(cha != null && cha.tag == "Enemy") {
+                Vector2 avoidance = transform.position - collision.transform.position;
+                direction += avoidance.normalized;
+                direction.Normalize();
+            }
+        }
+    }
+
 }
