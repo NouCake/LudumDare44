@@ -26,9 +26,9 @@ public abstract class MovementBehaviour : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (!disabled) {
+        if (!(disabled || controller.IsMoveBlocked())) {
             bool input = false;
-            if (controller.isMoveInput()) {
+            if (controller.IsMoveInputBlocked()) {
                  input = UpdateMovementInput();
             }
             body.velocity = direction * speed;

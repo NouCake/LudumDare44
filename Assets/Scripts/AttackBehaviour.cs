@@ -10,8 +10,8 @@ public class AttackBehaviour : MonoBehaviour {
     private float attackDurationTimer;
     private float attackCooldownTimer;
 
-    private CharController controller;
-    private Collider2D attackHitbox;
+    protected CharController controller;
+    protected Collider2D attackHitbox;
 
     private DamageableTracker tracker;
 
@@ -27,6 +27,11 @@ public class AttackBehaviour : MonoBehaviour {
         tracker = new DamageableTracker();
 
         InitHitbox();
+        init();
+    }
+
+    virtual protected void init() {
+
     }
 
     virtual protected void InitHitbox() {
@@ -39,7 +44,9 @@ public class AttackBehaviour : MonoBehaviour {
 
             if (attackCooldownTimer <= 0) {
                 if (AttackCondition()) {
+                    Debug.Log("START ATTACK");
                     Attack();
+                    OnAttackStart();
                 }
             } else {
                 attackCooldownTimer -= Time.deltaTime;
@@ -47,11 +54,12 @@ public class AttackBehaviour : MonoBehaviour {
 
             if(attackDurationTimer > 0) {
                 attackDurationTimer -= Time.deltaTime;
+                if(attackDurationTimer <= 0) {
+                    OnAttackEnd();
+                }
             }
 
         }
-
-        Debug.Log(isAttacking());
     }
     
     virtual protected bool AttackCondition() {
@@ -63,6 +71,14 @@ public class AttackBehaviour : MonoBehaviour {
         attackCooldownTimer += AttackCooldown;
         attackDurationTimer += AttackDuration;
         tracker.reset();
+    }
+
+    virtual protected void OnAttackStart() {
+
+    }
+
+    virtual protected void OnAttackEnd() {
+
     }
 
     public bool isAttacking() {
@@ -87,6 +103,7 @@ public class AttackBehaviour : MonoBehaviour {
 
     virtual protected void DealDamage(CharController target) {
         target.dmgBehav.DealPhysicalDamage(controller.stats);
+        target.Knockback(controller);
     }
 
 }

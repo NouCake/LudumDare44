@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 5798321807502874983}
   - component: {fileID: 5798321807502874986}
   - component: {fileID: 5798321807502874985}
+  - component: {fileID: 1600105598}
   - component: {fileID: 5798321807502874988}
   m_Layer: 0
   m_Name: Enemy
@@ -171,6 +172,20 @@ MonoBehaviour:
   speed: 15
   MaxPlayerDistance: 3
   MinPlayerDistance: 1
+--- !u!114 &1600105598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5798321807502874982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9565e8b7531310e42a85bac114a1d456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KnockbackDistance: 1
+  KnockbackTime: 0.25
 --- !u!50 &5798321807502874988
 Rigidbody2D:
   serializedVersion: 4

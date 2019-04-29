@@ -19,15 +19,18 @@ public class PlayerController : CharController{
     private PlayerMovementBehaviour movement;
 
     private GameObject DialogHitbox;
+    private GameObject Weapon;
 
     override protected void init(){
         DialogHitbox = transform.Find("hb_dialog").gameObject;
+        Weapon = transform.Find("Weapon").gameObject;
         movement = GetComponent<PlayerMovementBehaviour>();
     }
 
     override protected void ControllerUpdate() {
-        DialogHitbox.transform.localEulerAngles = Vector3.forward * movement.GetDirectionAxisOrientedAngle();
-
+        int angle = movement.GetDirectionAxisOrientedAngle();
+        DialogHitbox.transform.localEulerAngles = Vector3.forward * angle;
+        Weapon.transform.localEulerAngles = Vector3.forward * angle;
         if (Input.GetKeyDown(KeyCode.Space)) {
             CurTestFunction();
         }
