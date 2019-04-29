@@ -3,21 +3,25 @@ using System.Collections;
 
 public class CharController : MonoBehaviour {
     
-    public CharStats stats;
     public DamageBehaviour dmgBehav;
     private KnockbackBehaviour knockBehav;
+    public HealthController health; //Hide in Inspector
+
+    public Stats stats;
 
     protected Rigidbody2D body;
 
     private bool moveInput;
 
     void Start() {
-        moveInput = true;
-        dmgBehav = new DamageBehaviour(this);
-        stats =  new CharStats(100, 5, 5);
-
+        health = GetComponent<HealthController>();
         knockBehav = GetComponent<KnockbackBehaviour>();
         body = GetComponent<Rigidbody2D>();
+
+        moveInput = true;
+        dmgBehav = new DamageBehaviour(this);
+        stats = new Stats(5, 5);
+        stats.maxhealth = health.MaxHealth;
 
         init();
     }
@@ -34,6 +38,10 @@ public class CharController : MonoBehaviour {
     protected virtual void init() {
     }
 
+    public Stats GetTotalStats() {
+        return stats;
+    }
+
     public bool IsMoveInputBlocked() {
         return moveInput;
     }
@@ -43,8 +51,8 @@ public class CharController : MonoBehaviour {
         return knockBehav.IsKnockedBack();
     }
 
-    public void Knockback(CharController cha) {
-        knockBehav.Knockback(0.5f, transform.position - cha.transform.position);
+    public void OnHit(Transform source) {
+        knockBehav.Knockback(transform.position - source.position);
     }
 
     public void SetMoveInputBlocked(bool move) {

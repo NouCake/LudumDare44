@@ -35,20 +35,26 @@ public class DamageBehaviour {
 
     public void DealAbsoluteDamage(int dmg) {
         if (dmg <= 0) dmg = 1;
-        controller.stats.AddHealth(-dmg);
+        controller.health.AddHealth(-dmg);
     }
 
-    public void DealPhysicalDamage(CharStats attackingStats) {
-        int dmg = calculatePhysicalDamage(controller.stats, attackingStats);
+    public void DealPhysicalDamage(DamageableInformation other) {
+        int OtherStr = other.totalStats.physicalStrength;
+        OtherStr = adjustPhysicalDamagePreCalculation(OtherStr);
+        int dmg = calculatePhysicalDamage(OtherStr, 0); //TODO: Get total defence from me
         if (dmg <= 0) dmg = 1;
-        controller.stats.AddHealth(-dmg);
+        controller.health.AddHealth(-dmg);
+        controller.OnHit(other.sourceTransform);
     }
 
     public void DealPoisonDamage(int poison) {
         curpoison += adjustPoisonDamage(poison);
     }
 
-    virtual protected int adjustPhysicalDamage(int str) {
+    virtual protected int adjustPhysicalDamagePreCalculation(int str) {
+        return str;
+    }
+    virtual protected int adjustPhysicalDamagePostCalculation(int str){
         return str;
     }
 
@@ -56,10 +62,9 @@ public class DamageBehaviour {
         return poisDmg;
     }
 
-    private int calculatePhysicalDamage(CharStats attacking, CharStats defending) {
-        int str = adjustPhysicalDamage(attacking.GetStr());
-        int dmg = str * str / defending.GetDef();
-        if (dmg > 2 * str) dmg = 2 * str;
+    private int calculatePhysicalDamage(int physicalAttack, int physicalDefense) {
+        int dmg = physicalAttack * physicalAttack / physicalDefense;
+        if (dmg > 2 * physicalAttack) dmg = 2 * physicalAttack;
         return dmg;
     }
 

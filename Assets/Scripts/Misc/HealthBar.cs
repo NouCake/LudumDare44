@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour {
 
-    public CharController controller;
+    public HealthController health;
 
     private Transform bar;
 
@@ -14,7 +14,7 @@ public class HealthBar : MonoBehaviour {
     }
 
     private void Update() {
-        UpdateHealth(controller.stats.GetCurHealth() / (float)controller.stats.GetMaxHealth());
+        UpdateHealth(health.GetCurrentHealth() / (float)health.GetMaxHealth());
     }
 
     public void UpdateHealth(float percent) {

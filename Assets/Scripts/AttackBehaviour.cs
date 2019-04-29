@@ -102,8 +102,7 @@ public class AttackBehaviour : MonoBehaviour {
     }
 
     virtual protected void DealDamage(CharController target) {
-        target.dmgBehav.DealPhysicalDamage(controller.stats);
-        target.Knockback(controller);
+        target.dmgBehav.DealAbsoluteDamage(1);
     }
 
 }

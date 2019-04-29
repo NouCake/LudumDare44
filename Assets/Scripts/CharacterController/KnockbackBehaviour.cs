@@ -6,6 +6,7 @@ public class KnockbackBehaviour : MonoBehaviour {
 
     public float KnockbackDistance = 2;
     public float KnockbackTime = 0.7f;
+    public float KnockoutTime = 1;
     private float KnockbackDistanceTimer;
 
     private CharController controller;
@@ -46,8 +47,8 @@ public class KnockbackBehaviour : MonoBehaviour {
     /**
      * Knockout will not be additive
      */
-    public void Knockback(float knockoutTime, Vector2 direction) {
-        timer = knockoutTime;
+    public void Knockback(Vector2 direction) {
+        timer = KnockoutTime;
 
         direction.Normalize();
         body.velocity = direction * (KnockbackDistance / KnockbackTime);

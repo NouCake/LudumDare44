@@ -25,6 +25,7 @@ public class PlayerController : CharController{
         DialogHitbox = transform.Find("hb_dialog").gameObject;
         Weapon = transform.Find("Weapon").gameObject;
         movement = GetComponent<PlayerMovementBehaviour>();
+        
     }
 
     override protected void ControllerUpdate() {

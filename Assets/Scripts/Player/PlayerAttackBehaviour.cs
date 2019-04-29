@@ -8,6 +8,8 @@ public class PlayerAttackBehaviour : AttackBehaviour {
     override protected void init(){
         weapon = transform.Find("Weapon").gameObject;
         weapon.SetActive(false);
+
+        DamageableInformation info = new DamageableInformation(controller, transform, controller.GetTotalStats());
     }
 
     override protected void InitHitbox() {
