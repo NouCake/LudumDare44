@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd48aac9e5da4d4d82a3c241713c1b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 5
+  MaxHealth: 50
 --- !u!114 &4595622985658734647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KnockbackDistance: 0.75
   KnockbackTime: 0.075
+  KnockoutTime: 1
 --- !u!50 &4595622985658734640
 Rigidbody2D:
   serializedVersion: 4

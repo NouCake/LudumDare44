@@ -11,7 +11,7 @@ public class DamageableInformation {
     public DamageableInformation(CharController controller, Transform source, Stats totalStats) {
         this.controller = controller;
         this.sourceTransform = source;
-        this.totalStats = totalStats;
+        this.totalStats = new Stats(totalStats);
     }
     
 }

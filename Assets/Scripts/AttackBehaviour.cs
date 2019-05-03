@@ -63,13 +63,12 @@ public class AttackBehaviour : MonoBehaviour {
     }
     
     virtual protected bool AttackCondition() {
-        return Input.GetKeyDown(KeyCode.Return);
-        //return false;
+        return false;
     }
 
     private void Attack() {
-        attackCooldownTimer += AttackCooldown;
-        attackDurationTimer += AttackDuration;
+        attackCooldownTimer = AttackCooldown;
+        attackDurationTimer = AttackDuration;
         tracker.reset();
     }
 

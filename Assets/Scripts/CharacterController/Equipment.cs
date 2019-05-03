@@ -6,7 +6,7 @@ public class Equipment {
     public Stats stats;
 
     public Equipment() {
-        stats = new Stats(0, 2);
+        stats = new Stats(20, 20);
     }
 
     public void OnHit(CharController me, CharController attacker) {

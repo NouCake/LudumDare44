@@ -5,6 +5,7 @@ using TMPro;
 public class UIController : MonoBehaviour {
 
     private static UIController ui;
+
     public static UIController get() {
         return ui;
     }
@@ -24,14 +25,12 @@ public class UIController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
 
     }
 
-    public void setDialogCaption(string name)
-    {
-        caption.text = "- " + name + " -";
+    public void setDialogCaption(string name) {
+        caption.text = name;
     }
 
 }

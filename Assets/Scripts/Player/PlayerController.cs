@@ -16,7 +16,7 @@ public class PlayerController : CharController{
         singleton = this;
     }
 
-    private PlayerMovementBehaviour movement;
+    public PlayerMovementBehaviour movement;
 
     private GameObject DialogHitbox;
     private GameObject Weapon;
@@ -25,7 +25,16 @@ public class PlayerController : CharController{
         DialogHitbox = transform.Find("hb_dialog").gameObject;
         Weapon = transform.Find("Weapon").gameObject;
         movement = GetComponent<PlayerMovementBehaviour>();
-        
+
+        equip.addEquip(new Equipment());
+        equip.addEquip(new Equipment());
+        equip.addEquip(new Equipment());
+        equip.addEquip(new Equipment());
+        equip.addEquip(new Equipment());
+        equip.addEquip(new Equipment());
+        equip.addEquip(new Equipment());
+        equip.addEquip(new Equipment());
+        updateStats();
     }
 
     override protected void ControllerUpdate() {

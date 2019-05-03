@@ -4,10 +4,13 @@ using System.Collections;
 public class CharController : MonoBehaviour {
     
     public DamageBehaviour dmgBehav;
-    private KnockbackBehaviour knockBehav;
+    public KnockbackBehaviour knockBehav;
     public HealthController health; //Hide in Inspector
 
-    public Stats stats;
+    protected EquiptmentInventory equip;
+
+    public Stats BaseStats;
+    public Stats TotalStats;
 
     protected Rigidbody2D body;
 
@@ -20,8 +23,10 @@ public class CharController : MonoBehaviour {
 
         moveInput = true;
         dmgBehav = new DamageBehaviour(this);
-        stats = new Stats(5, 5);
-        stats.maxhealth = health.MaxHealth;
+        BaseStats = new Stats(5, 5);
+        BaseStats.maxhealth = health.MaxHealth;
+        TotalStats = new Stats(BaseStats);
+        equip = new EquiptmentInventory();
 
         init();
     }
@@ -38,8 +43,10 @@ public class CharController : MonoBehaviour {
     protected virtual void init() {
     }
 
-    public Stats GetTotalStats() {
-        return stats;
+    protected void updateStats() {
+        TotalStats.SetAll(0);
+        TotalStats.Add(BaseStats);
+        TotalStats.Add(equip.EquipStats);
     }
 
     public bool IsMoveInputBlocked() {

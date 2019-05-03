@@ -55,6 +55,14 @@ public class KnockbackBehaviour : MonoBehaviour {
         KnockbackDistanceTimer = KnockbackTime;
 
     }
+    public void Knockback(Vector2 direction, float knockbacktime, float knockouttime){
+        timer = knockouttime;
+
+        direction.Normalize();
+        body.velocity = direction * (KnockbackDistance / KnockbackTime);
+        KnockbackDistanceTimer = knockbacktime;
+
+    }
 
     private void OnKnockbackOver() {
         

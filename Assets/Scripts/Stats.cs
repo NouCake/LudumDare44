@@ -27,4 +27,46 @@
         maxhealth = 0;
     }
 
+    public Stats(Stats s) {
+        physicalStrength = s.physicalStrength;
+        poisonStrength = s.poisonStrength;
+        coldStrength = s.coldStrength;
+        fireStrength = s.fireStrength;
+
+        physicalResistance = s.physicalResistance;
+        poisonResistance = s.poisonResistance;
+        coldResistance = s.coldResistance;
+        fireResistance = s.fireResistance;
+
+        maxhealth = s.maxhealth;
+    }
+
+    public void Add(Stats s) {
+        physicalStrength += s.physicalStrength;
+        poisonStrength += s.poisonStrength;
+        coldStrength += s.coldStrength;
+        fireStrength += s.fireStrength;
+
+        physicalResistance += s.physicalResistance;
+        poisonResistance += s.poisonResistance;
+        coldResistance += s.coldResistance;
+        fireResistance += s.fireResistance;
+
+        maxhealth += s.maxhealth;
+    }
+
+    public void SetAll(int val) {
+        physicalStrength = val;
+        poisonStrength = val;
+        coldStrength = val;
+        fireStrength = val;
+
+        physicalResistance = val;
+        poisonResistance = val;
+        coldResistance = val;
+        fireResistance = val;
+
+        maxhealth = val;
+    }
+
 }

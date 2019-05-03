@@ -41,7 +41,7 @@ public class DamageBehaviour {
     public void DealPhysicalDamage(DamageableInformation other) {
         int OtherStr = other.totalStats.physicalStrength;
         OtherStr = adjustPhysicalDamagePreCalculation(OtherStr);
-        int dmg = calculatePhysicalDamage(OtherStr, 0); //TODO: Get total defence from me
+        int dmg = calculatePhysicalDamage(OtherStr, controller.TotalStats.physicalResistance); //TODO: Get total defence from me
         if (dmg <= 0) dmg = 1;
         controller.health.AddHealth(-dmg);
         controller.OnHit(other.sourceTransform);
@@ -63,6 +63,7 @@ public class DamageBehaviour {
     }
 
     private int calculatePhysicalDamage(int physicalAttack, int physicalDefense) {
+
         int dmg = physicalAttack * physicalAttack / physicalDefense;
         if (dmg > 2 * physicalAttack) dmg = 2 * physicalAttack;
         return dmg;
