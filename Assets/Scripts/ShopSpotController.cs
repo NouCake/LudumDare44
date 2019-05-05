@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShopSpotController : MonoBehaviour {
 
-    public Item ToSell;
+    public Equipment ToSell;
 
     private SpriteRenderer image;
     private DialogInterface dia;
@@ -17,7 +17,10 @@ public class ShopSpotController : MonoBehaviour {
     }
 
     public void OnDialog() {
-        Debug.Log("I just was bought");
-        image.gameObject.SetActive(false);
+        PlayerController player = PlayerController.get();
+        if (player.Eq.AddEquip(ToSell)) {
+            Debug.Log("I just was bought");
+            image.gameObject.SetActive(false);
+        }
     }
 }

@@ -2,7 +2,10 @@
 using UnityEngine;
 
 public class DamageBehaviour {
-    
+
+    public float InvincibleAfterHit = 1;
+    private float invincibleTimer;
+
     private CharController controller;
 
     private int curpoison;
@@ -15,6 +18,17 @@ public class DamageBehaviour {
 
     public void UpdateEffects(float deltaTime) {
         updatePoison(deltaTime);
+        updateInvincible(deltaTime);
+    }
+
+    private void updateInvincible(float deltaTime) {
+        if(invincibleTimer > 0) {
+            invincibleTimer -= deltaTime;
+        }
+    }
+
+    private bool isInvincible() {
+        return invincibleTimer > 0;
     }
 
     private void updatePoison(float deltaTime) {
@@ -39,12 +53,18 @@ public class DamageBehaviour {
     }
 
     public void DealPhysicalDamage(DamageableInformation other) {
+        if (isInvincible()) return;
+
         int OtherStr = other.totalStats.physicalStrength;
         OtherStr = adjustPhysicalDamagePreCalculation(OtherStr);
         int dmg = calculatePhysicalDamage(OtherStr, controller.TotalStats.physicalResistance); //TODO: Get total defence from me
         if (dmg <= 0) dmg = 1;
         controller.health.AddHealth(-dmg);
         controller.OnHit(other.sourceTransform);
+    }
+
+    public void SetInvincible(float time) {
+        invincibleTimer = time;
     }
 
     public void DealPoisonDamage(int poison) {

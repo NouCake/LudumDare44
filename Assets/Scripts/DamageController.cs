@@ -18,7 +18,7 @@ public class DamageController : MonoBehaviour {
                 Debug.Log(collision.name + " does not have CharController");
                 return;
             }
-            cha.dmgBehav.DealAbsoluteDamage(str);
+            cha.DmgBehav.DealAbsoluteDamage(str);
         }
     }
 

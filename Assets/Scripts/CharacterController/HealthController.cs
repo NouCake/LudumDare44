@@ -3,6 +3,10 @@ using System.Collections;
 
 public class HealthController : MonoBehaviour {
 
+    public delegate void OnHealthChanged();
+    public OnHealthChanged OnHealthChangedCallback;
+
+
     private int CurrentHealth;
     public int MaxHealth;
 
@@ -24,10 +28,11 @@ public class HealthController : MonoBehaviour {
         if (CurrentHealth <= 0) {
             OnHealthZero();
         }
+        if(OnHealthChangedCallback != null) OnHealthChangedCallback.Invoke();
     }
 
     private void OnHealthZero() {
-
+        controller.OnDeath();
     }
 
     public void UpdateHealth() {

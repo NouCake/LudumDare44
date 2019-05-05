@@ -8,12 +8,18 @@ public class HealthBar : MonoBehaviour {
 
     private Transform bar;
 
+    private void Awake() {
+        if(health == null) {
+            gameObject.SetActive(false);
+        }
+    }
 
     void Start() {
         bar = transform.Find("Bar");
+        health.OnHealthChangedCallback += UpdateHealth;
     }
 
-    private void Update() {
+    private void UpdateHealth() {
         UpdateHealth(health.GetCurrentHealth() / (float)health.GetMaxHealth());
     }
 

@@ -5,12 +5,16 @@ public class PlayerAttackBehaviour : AttackBehaviour {
 
     private GameObject weapon;
     private DamageableInformation dmgInfo;
+    private PlayerController pController;
+
+    public float ForwardDistance;
+    public float ForwardTime;
 
     override protected void init(){
         weapon = transform.Find("Weapon").gameObject;
         weapon.SetActive(false);
 
-
+        pController = (PlayerController)base.controller;
     }
 
     override protected void InitHitbox() {
@@ -23,19 +27,18 @@ public class PlayerAttackBehaviour : AttackBehaviour {
 
     protected override void OnAttackStart(){
         weapon.SetActive(true);
-        controller.SetMoveInputBlocked(true);
-        dmgInfo = new DamageableInformation(controller, transform, controller.TotalStats);
-        //controller.knockBehav.Knockback(((PlayerController)controller).movement.GetDirectionAxisOriented());
+        pController.SetMoveInputBlocked(true);
+        dmgInfo = new DamageableInformation(pController, transform, pController.TotalStats);
+        //pController.KnockBehav.CustomKnockback(pController.movement.GetDirectionAxisOriented(), ForwardDistance, ForwardTime, ForwardTime);
     }
 
     protected override void OnAttackEnd() {
         weapon.SetActive(false);
-        controller.SetMoveInputBlocked(false);
+        pController.SetMoveInputBlocked(false);
     }
 
     protected override void DealDamage(CharController target) {
-        Debug.Log("Hello");
-        target.dmgBehav.DealPhysicalDamage(dmgInfo);
+        target.DmgBehav.DealPhysicalDamage(dmgInfo);
     }
 
 }

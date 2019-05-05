@@ -3,10 +3,10 @@ using System.Collections;
 
 public class EnemyMovementBehaviour : MovementBehaviour {
 
-    public int MaxPlayerDistance = 6;
-    public int MinPlayerDistance = 1;
+    public float MaxPlayerDistance = 6;
+    public float MinPlayerDistance = 1;
 
-    private PlayerController player;
+    protected PlayerController player;
 
     override protected void init() {
         player = PlayerController.get();
@@ -16,14 +16,17 @@ public class EnemyMovementBehaviour : MovementBehaviour {
 
         float distance = Vector3.Distance(transform.position, player.transform.position);
         if (distance < MaxPlayerDistance && distance > MinPlayerDistance) {
-            
-            direction += (Vector2)(player.transform.position - transform.position);
-            direction.Normalize();
 
+            UpdateDirection();
             return true;
         }
 
         return false;
+    }
+
+    protected virtual void UpdateDirection() {
+        direction += (Vector2)(player.transform.position - transform.position);
+        direction.Normalize();
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
@@ -33,6 +36,7 @@ public class EnemyMovementBehaviour : MovementBehaviour {
                 Vector2 avoidance = transform.position - collision.transform.position;
                 direction += avoidance.normalized;
                 direction.Normalize();
+            } else {
             }
         }
     }

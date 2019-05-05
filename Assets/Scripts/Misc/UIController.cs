@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 using TMPro;
 
 public class UIController : MonoBehaviour {
 
-    private static UIController ui;
+    #region singleton
 
+    private static UIController ui;
     public static UIController get() {
         return ui;
     }
-
     void Awake() {
         if (ui != null) {
             Debug.Log("Too Many UIController");
@@ -18,19 +18,26 @@ public class UIController : MonoBehaviour {
         ui = this;
     }
 
+    #endregion
+
     public TextMeshProUGUI caption;
+    public GameObject Slots;
        
     void Start() {
-        caption.text = "- None -";
-    }
-
-    // Update is called once per frame
-    void Update() {
-
+        caption.text = "";
     }
 
     public void setDialogCaption(string name) {
         caption.text = name;
+    }
+
+    public void FillSlot(Equipment eq) {
+        Transform t = Slots.transform.Find("Slot " + eq.SlotType);
+        t = t.Find("SlotForm");
+        Image i = t.GetComponent<Image>();
+        i.sprite = eq.image;
+        i.color = Color.white;
+
     }
 
 }

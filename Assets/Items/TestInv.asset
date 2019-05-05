@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d65835c93ac20449a425dcf7bc8c254, type: 3}
-  m_Name: BasicArmor
+  m_Script: {fileID: 11500000, guid: 7ec46a10bfb513d4a8451f7b8c403a63, type: 3}
+  m_Name: TestInv
   m_EditorClassIdentifier: 
-  id: 1
-  price: 10
-  name: Base Armor
+  items:
+  - {fileID: 11400000, guid: d75bd13e7ae1c1d4b963954fd286e927, type: 2}
+  - {fileID: 11400000, guid: 0330c1f061056664eac8e51f19ccd152, type: 2}

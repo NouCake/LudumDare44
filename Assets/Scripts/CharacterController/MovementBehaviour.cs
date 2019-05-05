@@ -55,33 +55,5 @@ public abstract class MovementBehaviour : MonoBehaviour {
 
     protected abstract bool UpdateMovementInput();
     
-    public Vector2 GetDirectionAxisOriented() {
-
-        if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y)) {
-            if(direction.x > 0) {
-                return Vector2.right;
-            }
-            return Vector2.left;
-        } else {
-            if(direction.y < 0) {
-                return Vector2.down;
-            }
-            return Vector2.up; //Base Direction if direction = (0,0)
-        }
-    }
-    public int GetDirectionAxisOrientedAngle() {
-
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y)) {
-            if (direction.x > 0) {
-                return -90;
-            }
-            return 90;
-        } else {
-            if (direction.y < 0) {
-                return 180;
-            }
-            return 0; //Base Direction if direction = (0,0)
-        }
-    }
 
 }

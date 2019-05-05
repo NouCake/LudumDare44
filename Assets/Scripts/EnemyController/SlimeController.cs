@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlimeController : CharController {
 
     protected override void init() {
-        BaseStats = new Stats(4, 4);
+        BaseStats = new Stats(8, 5);
     }
 
 }

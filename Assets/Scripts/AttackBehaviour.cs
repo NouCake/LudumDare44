@@ -12,6 +12,7 @@ public class AttackBehaviour : MonoBehaviour {
 
     protected CharController controller;
     protected Collider2D attackHitbox;
+    protected Vector2 attackDirection;
 
     private DamageableTracker tracker;
 
@@ -28,6 +29,7 @@ public class AttackBehaviour : MonoBehaviour {
 
         InitHitbox();
         init();
+        attackDirection = Vector2.zero;
     }
 
     virtual protected void init() {
@@ -44,7 +46,6 @@ public class AttackBehaviour : MonoBehaviour {
 
             if (attackCooldownTimer <= 0) {
                 if (AttackCondition()) {
-                    Debug.Log("START ATTACK");
                     Attack();
                     OnAttackStart();
                 }
@@ -85,13 +86,14 @@ public class AttackBehaviour : MonoBehaviour {
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        if (isAttacking() && attackHitbox.IsTouching(collision)) {
-            if(collision.tag == "damageable") {
+        if(collision.tag == "damageable") {
+            if (isAttacking() && attackHitbox.IsTouching(collision)) {
                 CharController cha = collision.GetComponentInParent<CharController>();
                 if(cha == null) {
                     Debug.Log(collision.name + " does not have CharController");
                     return;
                 }
+                if(controller.tag == cha.tag) return;
                 if (!tracker.HasDamageable(cha)) {
                     tracker.AddDamageable(cha);
                     DealDamage(cha);
@@ -101,7 +103,7 @@ public class AttackBehaviour : MonoBehaviour {
     }
 
     virtual protected void DealDamage(CharController target) {
-        target.dmgBehav.DealAbsoluteDamage(1);
+        target.DmgBehav.DealAbsoluteDamage(1);
     }
 
 }

@@ -8,8 +8,4 @@ public class EnemyController : CharController {
         BaseStats = new Stats(4, 4);
     }
 
-    protected override void ControllerUpdate() {
-        //Debug.Log(body.velocity);
-    }
-
 }
