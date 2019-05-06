@@ -19,16 +19,12 @@ public class PlayerController : CharController{
     }
     #endregion
 
-    //public delegate void OnStatChanged();
-    //public OnStatChanged OnStatChangedCallback;
-
     public PlayerMovementBehaviour movement;
     private GameObject DialogHitbox;
     private GameObject Weapon;
 
     public EquiptmentInventory Eq;
-
-    private SpriteRenderer sprRenderer;
+    
 
     override protected void init(){
         DialogHitbox = transform.Find("hb_dialog").gameObject;
@@ -37,7 +33,6 @@ public class PlayerController : CharController{
 
         Eq = new EquiptmentInventory();
         Eq.OnEquipChangedCallback += updateStats;
-        sprRenderer = transform.Find("spr_player").GetComponent<SpriteRenderer>();
     }
 
     override protected void ControllerUpdate() {
@@ -50,7 +45,6 @@ public class PlayerController : CharController{
     }
 
     private void CurTestFunction() {
-        DmgBehav.DealPoisonDamage(3);
     }
 
     private void updateStats() {
@@ -63,17 +57,7 @@ public class PlayerController : CharController{
         base.OnHit(source);
         DmgBehav.SetInvincible(1);
         ScreenShaker.Shake(.2f, .1f);
-    }
-
-    private void OnTriggerStay2D(Collider2D collision) {
-        AttackBehaviour atk = collision.GetComponentInParent<AttackBehaviour>();
-        if(atk != null) {
-            if (atk.isAttacking()) {
-                sprRenderer.color = Color.red;
-            } else {
-                sprRenderer.color = Color.blue;
-            }
-        }
+        GetComponentInChildren<PlayerHittedAnimation>().StartAnimation();
     }
 
 }

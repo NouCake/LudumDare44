@@ -29,7 +29,6 @@ public class PlayerAttackBehaviour : AttackBehaviour {
         weapon.SetActive(true);
         pController.SetMoveInputBlocked(true);
         dmgInfo = new DamageableInformation(pController, transform, pController.TotalStats);
-        //pController.KnockBehav.CustomKnockback(pController.movement.GetDirectionAxisOriented(), ForwardDistance, ForwardTime, ForwardTime);
     }
 
     protected override void OnAttackEnd() {
@@ -39,6 +38,8 @@ public class PlayerAttackBehaviour : AttackBehaviour {
 
     protected override void DealDamage(CharController target) {
         target.DmgBehav.DealPhysicalDamage(dmgInfo);
+        MuzzleSpawner.Spawn(target.transform.position);
+        ScreenShaker.Shake(.2f, .1f);
     }
 
 }

@@ -7,6 +7,7 @@ public class GolemAttackBehaviour : AttackBehaviour {
     public float MinDistancePlayer = 1;
     private float chargeTimer;
     private PlayerController player;
+    private DamageableInformation info;
 
     #region placeholder
     private SpriteRenderer sprRenderer;
@@ -19,6 +20,8 @@ public class GolemAttackBehaviour : AttackBehaviour {
         sprRenderer = transform.Find("spr_enemy").GetComponent<SpriteRenderer>();
         Weapon = transform.Find("Weapon");
         chargeTimer = 0;
+        info = new DamageableInformation(controller, transform, controller.TotalStats);
+        Weapon.gameObject.SetActive(false);
     }
 
     override protected void InitHitbox() {
@@ -68,17 +71,17 @@ public class GolemAttackBehaviour : AttackBehaviour {
     }
 
     protected override void OnAttackStart() {
-        //Weapon.gameObject.SetActive(true);
+        Weapon.gameObject.SetActive(true);
     }
 
     protected override void OnAttackEnd() {
         sprRenderer.color = Color.gray;
         controller.SetMoveInputBlocked(false);
-       // Weapon.gameObject.SetActive(false);
+        Weapon.gameObject.SetActive(false);
     }
 
     protected override void DealDamage(CharController target) {
-        target.DmgBehav.DealAbsoluteDamage(10);
+        target.DmgBehav.DealPhysicalDamage(info);
     }
 
 }
