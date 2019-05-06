@@ -21,7 +21,6 @@ public class MuzzleController : MonoBehaviour {
                 gameObject.SetActive(false);
             }
         }
-        Debug.Log(timer);
     }
 
     public void reset() {

@@ -20,19 +20,24 @@ public class PlayerController : CharController{
     #endregion
 
     public PlayerMovementBehaviour movement;
+    private PlayerRollBehaviour roll;
     private GameObject DialogHitbox;
     private GameObject Weapon;
 
     public EquiptmentInventory Eq;
-    
+
+    #region rolling
+    #endregion
 
     override protected void init(){
         DialogHitbox = transform.Find("hb_dialog").gameObject;
         Weapon = transform.Find("Weapon").gameObject;
         movement = GetComponent<PlayerMovementBehaviour>();
+        roll = GetComponent<PlayerRollBehaviour>();
 
         Eq = new EquiptmentInventory();
         Eq.OnEquipChangedCallback += updateStats;
+
     }
 
     override protected void ControllerUpdate() {
@@ -58,6 +63,10 @@ public class PlayerController : CharController{
         DmgBehav.SetInvincible(1);
         ScreenShaker.Shake(.2f, .1f);
         GetComponentInChildren<PlayerHittedAnimation>().StartAnimation();
+    }
+
+    public override bool IsAttackBlocked() {
+        return base.IsAttackBlocked() || roll.isRolling();
     }
 
 }

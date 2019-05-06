@@ -53,6 +53,10 @@ public class CharController : MonoBehaviour {
         return KnockBehav.IsKnockedBack();
     }
 
+    public virtual bool IsAttackBlocked() {
+        return false;
+    }
+
     public virtual void OnHit(Transform source) {
         KnockBehav.Knockback(transform.position - source.position);
     }

@@ -45,7 +45,7 @@ public class AttackBehaviour : MonoBehaviour {
         if (!disabled) {
 
             if (attackCooldownTimer <= 0) {
-                if (AttackCondition()) {
+                if (!controller.IsAttackBlocked() && AttackCondition()) {
                     Attack();
                     OnAttackStart();
                 }
