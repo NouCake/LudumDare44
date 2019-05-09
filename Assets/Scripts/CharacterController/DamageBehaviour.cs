@@ -53,6 +53,7 @@ public class DamageBehaviour {
     }
 
     public void DealPhysicalDamage(DamageableInformation other) {
+        controller.OnHit(other.sourceTransform);
         if (isInvincible()) return;
 
         int OtherStr = other.totalStats.physicalStrength;
@@ -60,7 +61,6 @@ public class DamageBehaviour {
         int dmg = calculatePhysicalDamage(OtherStr, controller.TotalStats.physicalResistance); //TODO: Get total defence from me
         if (dmg <= 0) dmg = 1;
         controller.health.AddHealth(-dmg);
-        controller.OnHit(other.sourceTransform);
     }
 
     public void SetInvincible(float time) {

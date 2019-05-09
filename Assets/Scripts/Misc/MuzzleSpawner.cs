@@ -25,11 +25,13 @@ public class MuzzleSpawner : MonoBehaviour {
     private MuzzleController GetOrCreate() {
 
         for(int i = 0; i < muzl.Count; i++) {
-            if (muzl[i].gameObject.activeSelf)
+            if (!muzl[i].gameObject.activeSelf)
                 return muzl[i];
         }
 
-        return Instantiate(muzzle, transform).GetComponent<MuzzleController>();
+        MuzzleController muz = Instantiate(muzzle, transform).GetComponent<MuzzleController>();
+        muzl.Add(muz);
+        return muz;
     }
 
 }

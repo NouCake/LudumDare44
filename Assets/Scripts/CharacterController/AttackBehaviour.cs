@@ -7,7 +7,7 @@ public class AttackBehaviour : MonoBehaviour {
     public float AttackDuration = 0.75f;
     public float AttackCooldown = .5f;
 
-    private float attackDurationTimer;
+    protected float attackDurationTimer;
     private float attackCooldownTimer;
 
     protected CharController controller;
@@ -54,6 +54,7 @@ public class AttackBehaviour : MonoBehaviour {
             }
 
             if(attackDurationTimer > 0) {
+                WhileAttacking();
                 attackDurationTimer -= Time.deltaTime;
                 if(attackDurationTimer <= 0) {
                     OnAttackEnd();
@@ -63,6 +64,10 @@ public class AttackBehaviour : MonoBehaviour {
         }
     }
     
+    virtual protected void WhileAttacking() {
+
+    }
+
     virtual protected bool AttackCondition() {
         return false;
     }

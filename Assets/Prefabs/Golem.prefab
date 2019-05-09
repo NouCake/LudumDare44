@@ -202,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KnockBehav: {fileID: 0}
   health: {fileID: 0}
+  EnemyStats: {x: 10, y: 10}
 --- !u!114 &2194628680364165715
 MonoBehaviour:
   m_ObjectHideFlags: 0

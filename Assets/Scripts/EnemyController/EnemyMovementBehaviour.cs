@@ -36,7 +36,6 @@ public class EnemyMovementBehaviour : MovementBehaviour {
                 Vector2 avoidance = transform.position - collision.transform.position;
                 direction += avoidance.normalized;
                 direction.Normalize();
-            } else {
             }
         }
     }
